@@ -113,13 +113,8 @@ export class RegisterForm extends React.PureComponent {
 
         <StyledActions>
           {!loading && (
-            <Button
-              size="small"
-              color="primary"
-              type="submit"
-              disabled={!valid}
-            >
-              Register
+            <Button size="small" color="primary" type="submit" disabled>
+              Please check git for login details
             </Button>
           )}
           {loading && <CircularProgress />}
