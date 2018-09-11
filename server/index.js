@@ -105,15 +105,15 @@ const prettyHost = customHost || 'localhost';
 
 const httpServer = http.createServer(webserver);
 
-http.get('*', (req, res) => {
-  res.redirect(`https://talk.jackdh.com${req.url}`);
-});
-
 if (Boolean.valueOf(process.env.HTTPS)) {
   const httpsServer = https.createServer(credentials, webserver);
   // Start your app.
   httpsServer.listen(443, () => {
     logger.appStarted(443, prettyHost, true);
+
+    http.get('*', (req, res) => {
+      res.redirect(`https://talk.jackdh.com${req.url}`);
+    });
   });
 }
 
@@ -121,17 +121,18 @@ httpServer.listen(port, host, async err => {
   if (err) {
     return logger.error(err.message);
   }
-
-  // Connect to ngrok in dev mode
-  if (ngrok) {
-    let url;
-    try {
-      url = await ngrok.connect(port);
-    } catch (e) {
-      return logger.error(e);
+  if (!process.env.HTTPS) {
+    // Connect to ngrok in dev mode
+    if (ngrok) {
+      let url;
+      try {
+        url = await ngrok.connect(port);
+      } catch (e) {
+        return logger.error(e);
+      }
+      logger.appStarted(port, prettyHost, url);
+    } else {
+      logger.appStarted(port, prettyHost);
     }
-    logger.appStarted(port, prettyHost, url);
-  } else {
-    logger.appStarted(port, prettyHost);
   }
 });
