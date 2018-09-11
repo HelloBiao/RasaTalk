@@ -13,18 +13,27 @@ Feel free to message me on [![Gitter chat](https://badges.gitter.im/gitterHQ/git
 
 <h2 align="center">Demo</h2>
 
- http://www.talk.jackdh.com (User: demo@jackdh.com Pass: demo1234)
+ [http://www.talk.jackdh.com](http://www.talk.jackdh.com) (User: demo@jackdh.com Pass: demo1234) - Currently **down** due to traffic sorry! It'll be up shortly!
+ 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/1907451/43040505-2d57dc30-8d3d-11e8-9bb9-8ac65bf48a67.gif" alt="" height="300" />
+<img src="https://user-images.githubusercontent.com/1907451/43040505-2d57dc30-8d3d-11e8-9bb9-8ac65bf48a67.gif" alt="" height="500" />
 <p>
 <h2 align="center">Installation</h2>
 
-Either start MongoDB with Rasa NLU docker or host them separately. Make sure to update the .env file with the correct URLS!
+**Prerequisites**
+
+ - Database: [Mongodb](https://www.mongodb.com/) - You can run this locally or online like [mlab](https://mlab.com/)
+ - Chatbot Brain: [Rasa NLU](https://rasa.com/docs/nlu/) - I reccommend running with [Docker](https://hub.docker.com/r/rasa/rasa_nlu/)
+
 ```
-git clone ...
+git clone https://github.com/jackdh/RasaTalk/
+Rename example.env to '.env'
+Update the variables to include your MongoDB server IP and Rasa NLU IP.
 yarn
 yarn start
 ```
+
+**Or view https://github.com/jackdh/RasaTalk/wiki/Setup for a more detailed setup guide**
 
 <h2 align="center">Up and Running</h2>
 
@@ -121,12 +130,15 @@ Currently Facebook has been enabled with Slack and many more still to come!
 
 * Implement simple small talk.
 
-<h3>Todo</h3>
+<h3>Todo / Help requested!</h3>
 
 * Increase test coverage to 100%.
 * Add Travis / Appveyor
 * Provide autocomplete options for fields such as nodes.
 * Better validation / error notifications.
+* Add rename option for intents / expressions
+* Add backup option for node / training data.
+* Add sockets for chat as well as update notifications.
 
 <h3>Known issues</h3>
 

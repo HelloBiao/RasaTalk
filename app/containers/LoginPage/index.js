@@ -33,9 +33,7 @@ const Wrapper = styled.div`
 `;
 
 const Image = styled.img`
-  //position: absolute;
   width: 200px;
-  //top: 0;
 `;
 
 const Sub = styled(Typography)`
@@ -109,7 +107,7 @@ export class LoginPage extends React.PureComponent {
             <RegisterForm
               loading={loading}
               onSubmit={() => this.props.dispatch(registerRequest())}
-              loginError={registerError}
+              registerError={registerError}
             />
           </SwipeableViews>
         </StyledCard>
