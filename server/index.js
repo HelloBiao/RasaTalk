@@ -106,7 +106,7 @@ const prettyHost = customHost || 'localhost';
 const httpServer = http.createServer(webserver);
 
 http.get('*', (req, res) => {
-  res.redirect(`https://${req.headers.host}${req.url}`);
+  res.redirect(`https://talk.jackdh.com${req.url}`);
 });
 
 if (Boolean.valueOf(process.env.HTTPS)) {
