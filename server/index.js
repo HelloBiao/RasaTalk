@@ -5,7 +5,7 @@ const http = require('http');
 const https = require('https');
 
 let credentials = {};
-if (process.env.HTTPS === 'true') {
+if (process.env.HTTPSPORT) {
   const key = fs.readFileSync(
     '/etc/letsencrypt/live/talk.jackdh.com/privkey.pem',
     'utf8',
@@ -105,11 +105,11 @@ const prettyHost = customHost || 'localhost';
 
 const httpServer = http.createServer(webserver);
 
-if (process.env.HTTPS === 'true') {
+if (process.env.HTTPSPORT) {
   const httpsServer = https.createServer(credentials, webserver);
   // Start your app.
-  httpsServer.listen(443, () => {
-    logger.appStarted(443, prettyHost, true);
+  httpsServer.listen(process.env.HTTPSPORT, () => {
+    logger.appStarted(process.env.HTTPSPORT, prettyHost, true);
 
     // http.get('*', (req, res) => {
     //   res.redirect(`https://talk.jackdh.com${req.url}`);
