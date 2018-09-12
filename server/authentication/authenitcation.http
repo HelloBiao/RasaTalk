@@ -20,8 +20,8 @@ POST http://localhost:5001/auth/login
 Content-Type: application/json
 
 {
-  "email": "Jack@jackdh.com",
-  "password": "myPassword"
+  "email": "demo@jackdh.com",
+  "password": "demo1234"
 }
 
 ###

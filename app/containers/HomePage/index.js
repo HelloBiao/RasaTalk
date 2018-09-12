@@ -38,8 +38,6 @@ import saga from './saga';
 import { makeSelectTitle, selectUser } from './selectors';
 import { changeTitle, setUser } from './actions';
 
-axios.defaults.headers.common.Authorization = localStorage.getItem('token');
-
 export class HomePage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
 
@@ -55,6 +53,9 @@ export class HomePage extends React.Component {
     } else {
       const parse = JSON.parse(localStorage.getItem('user'));
       this.props.addUser(parse);
+      axios.defaults.headers.common.Authorization = localStorage.getItem(
+        'token',
+      );
     }
   }
 

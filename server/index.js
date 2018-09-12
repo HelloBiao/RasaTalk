@@ -82,18 +82,15 @@ webserver.listen(port, host, async err => {
   if (err) {
     return logger.error(err.message);
   }
-  if (process.env.HTTPS !== 'true') {
-    // Connect to ngrok in dev mode
-    if (ngrok) {
-      let url;
-      try {
-        url = await ngrok.connect(port);
-      } catch (e) {
-        return logger.error(e);
-      }
-      logger.appStarted(port, prettyHost, url);
-    } else {
-      logger.appStarted(port, prettyHost);
+  if (ngrok) {
+    let url;
+    try {
+      url = await ngrok.connect(port);
+    } catch (e) {
+      return logger.error(e);
     }
+    logger.appStarted(port, prettyHost, url);
+  } else {
+    logger.appStarted(port, prettyHost);
   }
 });
