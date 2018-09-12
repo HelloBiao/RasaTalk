@@ -4,6 +4,9 @@ services:
     build:
       context: .
       dockerfile: ./internals/docker/Dockerfile
+    depends_on:
+      - rasa
+      - mongodb
     command: npm run start:prod
     networks:
       - my-net
@@ -13,18 +16,16 @@ services:
       - DEBUG=*,-babel
       - PORT=80
     ports:
-      - "80:80"
-    volumes:
-      - ./app:/code/app
-      - ./package.json:/code/package.json
-      - ./yarn.lock:/code/yarn.lock
-      - ./server:/code/server
+      - 80:80
+      - 443:443
   rasa:
     container_name: "rasa"
     image: rasa/rasa_nlu
     restart: always
     networks:
       - my-net
+    ports:
+    - 5000:5000
     volumes:
       - ./data/rasa/projects:/app/projects
       - ./data/rasa/logs:/app/logs
@@ -33,6 +34,8 @@ services:
     container_name: "mongo"
     image: mongo
     restart: always
+    ports:
+      - 27017:27017
     networks:
       - my-net
     volumes:

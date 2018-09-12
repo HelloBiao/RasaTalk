@@ -1,6 +1,6 @@
-FROM node:10-slim
+FROM node:10
 
-RUN apt-get update && apt-get install libpng12-0 bzip2
+# RUN apt-get update && apt-get install libpng12-0 bzip2
 
 # Create app directory
 WORKDIR /usr/src/app

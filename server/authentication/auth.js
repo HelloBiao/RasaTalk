@@ -1,6 +1,6 @@
 const validator = require('validator');
 const passport = require('passport');
-
+const debug = require('debug')('Auth');
 /**
  * Validate the sign up form
  *
@@ -128,7 +128,7 @@ function signup(req, res, next) {
           message: 'This email is already taken.',
         });
       }
-
+      debug(err);
       return res.status(400).json({
         success: false,
         message: 'Could not process the form. The server is likely down.',
@@ -165,7 +165,7 @@ function login(req, res, next) {
           message: err.message,
         });
       }
-
+      debug(err);
       return res.status(400).json({
         success: false,
         message: 'Could not process the form. The server is likely down.',

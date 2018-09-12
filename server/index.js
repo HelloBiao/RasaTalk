@@ -5,7 +5,7 @@ const http = require('http');
 const https = require('https');
 
 let credentials = {};
-if (Boolean.valueOf(process.env.HTTPS)) {
+if (process.env.HTTPS === 'true') {
   const key = fs.readFileSync(
     '/etc/letsencrypt/live/talk.jackdh.com/privkey.pem',
     'utf8',
@@ -105,15 +105,15 @@ const prettyHost = customHost || 'localhost';
 
 const httpServer = http.createServer(webserver);
 
-if (Boolean.valueOf(process.env.HTTPS)) {
+if (process.env.HTTPS === 'true') {
   const httpsServer = https.createServer(credentials, webserver);
   // Start your app.
   httpsServer.listen(443, () => {
     logger.appStarted(443, prettyHost, true);
 
-    http.get('*', (req, res) => {
-      res.redirect(`https://talk.jackdh.com${req.url}`);
-    });
+    // http.get('*', (req, res) => {
+    //   res.redirect(`https://talk.jackdh.com${req.url}`);
+    // });
   });
 }
 
@@ -121,7 +121,7 @@ httpServer.listen(port, host, async err => {
   if (err) {
     return logger.error(err.message);
   }
-  if (!process.env.HTTPS) {
+  if (process.env.HTTPS !== 'true') {
     // Connect to ngrok in dev mode
     if (ngrok) {
       let url;
